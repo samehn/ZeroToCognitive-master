@@ -1,0 +1,18 @@
+#!/bin/bash
+
+ded_URL="https://api.w3ibm.bluemix.net"
+pub_URL="https://api.ng.bluemix.net"
+targetURL=""
+shopt -s nocasematch
+if [[ $2 == "dedicated" ]]
+then targetURL=$ded_URL
+elif [[ $2 == "public" ]]
+then targetURL=$pub_URL
+else
+  echo "Parameter 2 is required to be either 'public' or 'dedicated'"
+  echo "Please reissue the command as 'z2c_login {your_login_id} {public || dedicated}'"
+  exit -1
+fi
+echo "logging $1 in to IBM $2 Bluemix "
+
+cf login -a "$targetURL" -u "$1"
